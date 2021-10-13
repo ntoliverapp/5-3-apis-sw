@@ -1,0 +1,72 @@
+Part 2: Social Mountain
+Summary
+In this section, you’ll be looking through the documentation for the Social Mountain API and answering questions. You’ll also be making requests and recording the URLs and some information about the responses. Run the requests in Postman. Note: this API is live and viewable by your classmates and staff. Keep things appropriate for class.
+You can view the documentation for the Social Mountain API here
+The base URL of your requests is: https://practiceapi.devmountain.com/api (make sure to have the “s” in “https”)
+Check if the POST request accept params, queries, and/or a body. Which one(s) and what information is it expecting to be sent?
+param - No, Error
+query - https://practiceapi.devmountain.com/api/posts?id=28
+body - No
+
+What data type does the GET request return?
+
+GET https://practiceapi.devmountain.com/api/posts
+
+object data type, id, string, date
+
+[
+    {
+        "id": 28,
+        "text": "Coding is fun!!",
+        "date": "12 Oct 2021"
+    }
+]
+What would the URL look like for deleting the post with the id 555? (This post does not exist anymore, but the syntax is the same for existing posts, )
+
+DELETE  https://practiceapi.devmountain.com/api/posts?id=555
+
+List the possible response codes from the GET request at ‘/posts/filter’
+
+200 - Returns an array of filtered posts
+409 - Request query is missing required text property.
+
+Create a post whose text is your name, record the URL and body here:
+
+POST  https://practiceapi.devmountain.com/api/posts
+
+    {
+        "text": "your name"
+    }
+
+response body:
+[
+  {
+    "id": 29,
+    "text": "your name",
+    "date": "13 Oct 2021"
+  }
+]
+
+What would the URL and body object be to update the post you just made to contain your favorite color instead of your name?
+PUT  https://practiceapi.devmountain.com/api/posts?id=29
+
+    {
+        "text": "green"
+    }
+
+What is the URL to get posts that contain the text “blue”?
+
+https://practiceapi.devmountain.com/api/posts/filter?text=blue
+
+Make a request to GET all the posts. What are the content type and charset of the response? (Hint: look on the Headers)
+content-type: application/json; charset=utf-8 
+
+What would cause a PUT request to return a 409 status?
+
+Request was missing req.query.id or req.body.text
+
+What happens if you try to send a query in the GET request URL? Why do you get that response?
+
+https://practiceapi.devmountain.com/api/posts?id=28
+
+You get the id that is in the database, even if you request a different id (even one that doesn't exist). There are a lot of texts with colors. There is no 400 set up to send back as a response for bad requests.
